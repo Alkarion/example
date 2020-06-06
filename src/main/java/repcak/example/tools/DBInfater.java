@@ -17,9 +17,10 @@ public class DBInfater implements ApplicationListener<ContextRefreshedEvent>{
     private ArtistRepository artistRepository;
     private PublisherRepository publisherRepository;
 
-    public DBInfater(SongRepository songRepository, ArtistRepository artistRepository) {
+    public DBInfater(SongRepository songRepository, ArtistRepository artistRepository, PublisherRepository publisherRepository) {
         this.songRepository = songRepository;
         this.artistRepository = artistRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override

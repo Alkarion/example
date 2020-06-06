@@ -19,7 +19,9 @@ public class Song {
     private String genre;
     private String ismn;
     private String year;
-    private String publisher;
+
+    @ManyToOne
+    private Publisher publisher;
 
     @ManyToMany
     private Set<Artist> artists = new HashSet<>();
@@ -27,7 +29,7 @@ public class Song {
     public Song() {
     }
 
-    public Song(String title, String genre, String ismn, String year, String publisher) {
+    public Song(String title, String genre, String ismn, String year, Publisher publisher) {
         this.title = title;
         this.genre = genre;
         this.ismn = ismn;
