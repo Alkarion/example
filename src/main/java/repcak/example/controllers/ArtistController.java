@@ -9,10 +9,16 @@ import repcak.example.model.Artist;
 @Controller
 public class ArtistController {
 
+private ArtistRepository artistRepository;
+
+    public ArtistController(ArtistRepository artistRepository) {
+        this.artistRepository = artistRepository;
+    }
+
     @RequestMapping("/artists")
     public String getArtist(Model model){
 
-        model.addAttribute("artists", ArtistRepository.findAll());
+        model.addAttribute("artists", artistRepository.findAll());
 
         return "songs";
     }
