@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import repcak.example.repositories.ArtistRepository;
-import repcak.example.model.Artist;
 
 @Controller
 public class ArtistController {
@@ -20,7 +19,7 @@ private ArtistRepository artistRepository;
 
         model.addAttribute("artists", artistRepository.findAll());
 
-        return "songs";
+        return "artists";
     }
 
 }

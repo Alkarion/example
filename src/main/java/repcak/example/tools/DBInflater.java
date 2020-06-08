@@ -11,13 +11,13 @@ import repcak.example.repositories.SongRepository;
 import repcak.example.repositories.PublisherRepository;
 
 @Component
-public class DBInfater implements ApplicationListener<ContextRefreshedEvent>{
+public class DBInflater implements ApplicationListener<ContextRefreshedEvent>{
 
     private SongRepository songRepository;
     private ArtistRepository artistRepository;
     private PublisherRepository publisherRepository;
 
-    public DBInfater(SongRepository songRepository, ArtistRepository artistRepository, PublisherRepository publisherRepository) {
+    public DBInflater(SongRepository songRepository, ArtistRepository artistRepository, PublisherRepository publisherRepository) {
         this.songRepository = songRepository;
         this.artistRepository = artistRepository;
         this.publisherRepository = publisherRepository;

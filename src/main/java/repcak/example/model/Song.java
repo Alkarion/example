@@ -2,6 +2,7 @@ package repcak.example.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -36,7 +37,7 @@ public class Song {
         this.year = year;
         this.publisher = publisher;
     }
-
+/*
     public Song(String title, String genre, String ismn, String year, Set<Artist> artists) {
         this.title = title;
         this.genre = genre;
@@ -44,5 +45,5 @@ public class Song {
         this.year = year;
         this.publisher = publisher;
         this.artists = artists;
-    }
+    }*/
 }

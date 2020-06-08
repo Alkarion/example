@@ -30,6 +30,7 @@ public class Artist {
         this.lastName = lastName;
         this.nick = nick;
     }
+
     public Artist(String firstName, String lastName, String nick, Set<Song> songs) {
         this.firstName = firstName;
         this.lastName = lastName;
