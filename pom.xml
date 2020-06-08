@@ -12,7 +12,7 @@
 	<artifactId>example</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>example</name>
-	<description>My introducton into Spring</description>
+	<description>My introduction into Spring</description>
 
 	<properties>
 		<java.version>1.8</java.version>

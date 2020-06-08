@@ -8,7 +8,7 @@ import repcak.example.repositories.ArtistRepository;
 @Controller
 public class ArtistController {
 
-private ArtistRepository artistRepository;
+    private ArtistRepository artistRepository;
 
     public ArtistController(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
