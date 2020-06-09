@@ -41,13 +41,13 @@ public class PublisherController {
 
     @GetMapping
     @RequestMapping("/publisher/new")
-    public String newSong(Model model){
+    public String newSong(Model model) {
         model.addAttribute("publisher", new PublisherCommand());
         return "publisher/addedit";
     }
 
     @PostMapping("publisher")
-    public String saveOrUpdate(@ModelAttribute PublisherCommand command){
+    public String saveOrUpdate(@ModelAttribute PublisherCommand command) {
 
         Optional<Publisher> publisherOptional = publisherRepository.getPublisherByName(command.getName());
 
@@ -61,3 +61,5 @@ public class PublisherController {
             return "redirect:/publisher/" + publisherOptional.get().getId() + "/show";
         }
     }
+
+}

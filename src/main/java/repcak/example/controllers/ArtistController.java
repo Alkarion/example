@@ -17,14 +17,14 @@ public class ArtistController {
 
     private ArtistRepository artistRepository;
     private SongRepository songRepository;
-    private ArtistsCommandToArtists artistCommandToArtists;
+    private ArtistsCommandToArtists artistsCommandToArtists;
 
     public ArtistController(ArtistRepository artistRepository, SongRepository songRepository) {
         this.artistRepository = artistRepository;
         this.songRepository = songRepository;
     }
 
-    @RequestMapping("/artist", "/artist/list")
+    @RequestMapping(value = {"/artist", "/artist/list"})
     public String getArtist(Model model){
 
         model.addAttribute("artists", artistRepository.findAll());
@@ -45,7 +45,7 @@ public class ArtistController {
         Optional<Artist> artistOptional = artistRepository.getFirstByFirstNameAndLastName(command.getFirstName(), command.getLastName());
 
         if (!artistOptional.isPresent()) {
-            Artist detachedArtist = artistCommandToArtist.convert(command);
+            Artist detachedArtist = artistsCommandToArtists.convert(command);
             Artist savedArtist = artistRepository.save(detachedArtist);
             return "redirect:/artist/" + savedArtist.getId() + "/show";
         } else {

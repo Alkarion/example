@@ -28,13 +28,6 @@ public class SongController {
         this.artistRepository = artistRepository;
     }
 
-    @RequestMapping("/songs")
-    public String getSongs(Model model) {
-
-        model.addAttribute("songs", songRepository.findAll());
-
-        return "songs";
-    }
 
     @GetMapping
     @RequestMapping(value = {"/songs" , "song/list"})

@@ -5,7 +5,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import repcak.example.model.Publisher;
-import repcak.example.commands.PublisherCommand
+import repcak.example.commands.PublisherCommand;
 
 @Component
 public class PublisherCommandToPublisher implements Converter<PublisherCommand, Publisher> {

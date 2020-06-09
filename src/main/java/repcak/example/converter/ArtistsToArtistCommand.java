@@ -1,5 +1,5 @@
 package repcak.example.converter;
-
+/*
 import lombok.Synchronized;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.core.convert.converter.Converter;
 
 
 @Component
-public class ArtiststoArtistCommand implements Converter<Artist, ArtistCommand>{
+public class ArtistsToArtistCommand implements Converter<Artist, ArtistCommand>{
 
     @Synchronized
     @Nullable
@@ -26,4 +26,4 @@ public class ArtiststoArtistCommand implements Converter<Artist, ArtistCommand>{
         return artistCommand;
     }
 
-}
+}*/
