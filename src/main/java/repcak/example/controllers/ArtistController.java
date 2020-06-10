@@ -1,4 +1,4 @@
-package com.example.muslibry5k.controllers;
+package com.example.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
