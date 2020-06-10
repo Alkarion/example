@@ -26,4 +26,5 @@ public class ArtistsToArtistCommand implements Converter<Artist, ArtistCommand>{
         return artistCommand;
     }
 
-}*/
+}
+*/
