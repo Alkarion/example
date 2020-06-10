@@ -1,41 +1,33 @@
-package repcak.example.controllers;
+package com.example.muslibry5k.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import repcak.example.commands.ArtistCommand;
-import org.springframework.web.bind.annotation.RequestMapping;
-import repcak.example.repositories.ArtistRepository;
-import repcak.example.repositories.SongRepository;
-import repcak.example.converter.ArtistsCommandToArtists;
 import org.springframework.web.bind.annotation.*;
-import repcak.example.model.Artist;
 
-import java.util.Optional;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class ArtistController {
 
-    private ArtistRepository artistRepository;
-    private SongRepository songRepository;
-    private ArtistsCommandToArtists artistsCommandToArtists;
+    private repcak.example.repositories.ArtistRepository artistRepository;
+    private repcak.example.repositories.SongRepository songRepository;
+    private repcak.example.converter.ArtistCommandToArtist artistCommandToArtist;
 
-    public ArtistController(ArtistRepository artistRepository, SongRepository songRepository) {
+    public ArtistController(repcak.example.repositories.ArtistRepository artistRepository, repcak.example.repositories.SongRepository songRepository) {
         this.artistRepository = artistRepository;
         this.songRepository = songRepository;
     }
 
-    @RequestMapping(value = {"/artist", "/artist/list"})
-    public String getArtist(Model model){
-
+    @RequestMapping(value = {"/artists", "/artist/list"})
+    public String getArtists(Model model) {
         model.addAttribute("artists", artistRepository.findAll());
-
         return "artist/list";
     }
 
     @RequestMapping("/artist/{id}/songs")
     public String getArtistSongs(Model model, @PathVariable("id") Long id) {
-        Optional<Artist> artist = artistRepository.findById(id);
+        Optional<repcak.example.model.Artist> artist = artistRepository.findById(id);
 
         if (artist.isPresent()) {
             model.addAttribute("songs", songRepository.getAllByArtistsIsContaining(artist.get()));
@@ -46,13 +38,6 @@ public class ArtistController {
         }
 
         return "song/list";
-    }
-
-    @GetMapping
-    @RequestMapping("/artist/new")
-    public String newSong(Model model){
-        model.addAttribute("artist", new ArtistCommand());
-        return "artist/addedit";
     }
 
     @RequestMapping("/artist/{id}/show")
@@ -67,14 +52,21 @@ public class ArtistController {
         return "redirect:/artists";
     }
 
-    @PostMapping("artist")
-    public String saveOrUpdate(@ModelAttribute ArtistCommand command){
+    @GetMapping
+    @RequestMapping("/artist/new")
+    public String newSong(Model model){
+        model.addAttribute("artist", new repcak.example.commands.ArtistCommand());
+        return "artist/addedit";
+    }
 
-        Optional<Artist> artistOptional = artistRepository.getFirstByFirstNameAndLastName(command.getFirstName(), command.getLastName());
+    @PostMapping("artist")
+    public String saveOrUpdate(@ModelAttribute repcak.example.commands.ArtistCommand command){
+
+        Optional<repcak.example.model.Artist> artistOptional = artistRepository.getFirstByFirstNameAndLastName(command.getFirstName(), command.getLastName());
 
         if (!artistOptional.isPresent()) {
-            Artist detachedArtist = artistsCommandToArtists.convert(command);
-            Artist savedArtist = artistRepository.save(detachedArtist);
+            repcak.example.model.Artist detachedArtist = artistCommandToArtist.convert(command);
+            repcak.example.model.Artist savedArtist = artistRepository.save(detachedArtist);
             return "redirect:/artist/" + savedArtist.getId() + "/show";
         } else {
             //TODO: error message to template
@@ -82,5 +74,4 @@ public class ArtistController {
             return "redirect:/artist/" + artistOptional.get().getId() + "/show";
         }
     }
-
 }

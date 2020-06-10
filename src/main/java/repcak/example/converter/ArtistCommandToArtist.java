@@ -8,7 +8,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 
 @Component
-public class ArtistsCommandToArtists implements Converter<ArtistCommand, Artist> {
+public class ArtistCommandToArtist implements Converter<ArtistCommand, Artist> {
 
     @Synchronized
     @Nullable
