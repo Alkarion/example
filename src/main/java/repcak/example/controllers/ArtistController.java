@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import repcak.example.model.Artist;
 
 import java.util.Optional;
+import java.util.ArrayList;
 
 @Controller
 public class ArtistController {
@@ -32,11 +33,38 @@ public class ArtistController {
         return "artist/list";
     }
 
+    @RequestMapping("/artist/{id}/songs")
+    public String getArtistSongs(Model model, @PathVariable("id") Long id) {
+        Optional<Artist> artist = artistRepository.findById(id);
+
+        if (artist.isPresent()) {
+            model.addAttribute("songs", songRepository.getAllByArtistsIsContaining(artist.get()));
+            model.addAttribute("filter", "artist: " + artist.get().getFirstName() + " " + artist.get().getLastName());
+        } else {
+            model.addAttribute("songs", new ArrayList<>());
+            model.addAttribute("filter", "artist for this id doesn't exist");
+        }
+
+        return "song/list";
+    }
+
     @GetMapping
     @RequestMapping("/artist/new")
     public String newSong(Model model){
         model.addAttribute("artist", new ArtistCommand());
         return "artist/addedit";
+    }
+
+    @RequestMapping("/artist/{id}/show")
+    public String getArtistDetails(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("artist", artistRepository.findById(id).get());
+        return "artist/show";
+    }
+
+    @RequestMapping("/artist/{id}/delete")
+    public String deleteArtist(@PathVariable("id") Long id) {
+        artistRepository.deleteById(id);
+        return "redirect:/artists";
     }
 
     @PostMapping("artist")
@@ -53,18 +81,6 @@ public class ArtistController {
             System.out.println("Sorry, there's such artist in db");
             return "redirect:/artist/" + artistOptional.get().getId() + "/show";
         }
-    }
-
-    @RequestMapping("/artist/{id}/show")
-    public String getArtistDetails(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("artist", artistRepository.findById(id).get());
-        return "artist/show";
-    }
-
-    @RequestMapping("/artist/{id}/delete")
-    public String deleteArtist(@PathVariable("id") Long id) {
-        artistRepository.deleteById(id);
-        return "redirect:/artists";
     }
 
 }
