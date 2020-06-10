@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SongCommand {
     private Long id;
-    private String tittle;
+    private String title;
     private String genre;
     private String ismn;
     private String year;
