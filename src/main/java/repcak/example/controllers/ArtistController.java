@@ -1,4 +1,4 @@
-package com.example.controllers;
+package repcak.example.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
